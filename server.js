@@ -10,8 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join('public')));
 
-// gets notes from the db.json file 
-app.get('/api/notes', (req, res) => {
+// get notes from the db.json file 
+app.get('/api/notes.html', (req, res) => {
     res.json(notes);
 })
 
@@ -39,7 +39,7 @@ function validateNote(note) {
     return true;
   }
 
-app.post('/api/notes', (req, res) => {
+app.post('/api/notes.html', (req, res) => {
     console.log(req.body);
     req.body.id = notes.length.toString();
     
@@ -58,7 +58,7 @@ app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
 })
 
-app.get('/notes', (req,res) => {
+app.get('/notes.html', (req,res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'))
 })
 
