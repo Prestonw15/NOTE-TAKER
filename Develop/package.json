@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4",
-    "node": "^17.4.0",
-    "node.js": "0.0.1-security"
+    "express": "^4.16.4"
   }
 }
