@@ -15,7 +15,7 @@ app.get('/api/notes', (req, res) => {
     res.json(notes);
 })
 
-function createNote(body, notesArray) {
+function createNewNote(body, notesArray) {
     const note = body;
     notesArray.push(note)
 
@@ -43,7 +43,7 @@ app.post('/api/notes', (req, res) => {
     if (!validateNote(req.body)) {
         res.status(400).send('The note is not properly formatted. ');
     } else {
-        const note = createNote(req.body, notes)
+        const note = createNewNote(req.body, notes)
 
         res.json(note);
     }
