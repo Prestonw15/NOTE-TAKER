@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static(path.join('public')));
 
 app.get('/api/notes', (req, res) => {
-    res.json(notes);
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
 })
 
 function createNewNote(body, notesArray) {
