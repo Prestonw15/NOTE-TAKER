@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
-const { notes } = require('./Develop/db/db.json');
-
+const  notes  = require('./Develop/db/db.json');
+console.log(notes)
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static(path.join('public')));
 
 app.get('/api/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
+    res.json(notes.notesArray)
 })
 
 function createNewNote(body, notesArray) {
@@ -19,7 +19,7 @@ function createNewNote(body, notesArray) {
     
     fs.writeFileSync(
         path.join(__dirname, './Develop/db/db.json'),
-        JSON.stringify({notes: notesArray }, null, 1)
+        JSON.stringify({notesArray: notesArray }, null, 1)
     );
 
     return body;
@@ -38,13 +38,13 @@ function validateNote(note) {
 }
 
 app.post('/api/notes', (req, res) => {
-    console.log(req.body);
-    req.body.id = notes.length.toString();
+    console.log(notes);
+    req.body.id = notes.notesArray.length.toString();
 
     if (!validateNote(req.body)) {
         res.status(400).send('Your note is not formatted correctly, please fix.');
     } else {
-        const note = createNewNote(req.body, notes)
+        const note = createNewNote(req.body, notes.notesArray)
         res.json(note);
     }
 })
